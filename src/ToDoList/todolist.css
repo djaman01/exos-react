@@ -1,0 +1,18 @@
+.my-task {
+
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.pen-trash {
+  width: 60px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.btn-task {
+  cursor: pointer;
+}
