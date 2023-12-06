@@ -32,29 +32,59 @@ export default function Todolist() {
   }
 
   //Pour modifier le task dans un input au même endroit
-
   const [editingIndex, setEditingIndex] = useState(null);
+  const [editedTask, setEditedTask] = useState("");
+
+  const handleCancel = () => {
+    setEditingIndex(null)
+  }
+
+  const updatedTasks = [...tasks];
+
+  const handleUpdate = (index) => {
+    updatedTasks[index] = editedTask;
+    setTasks(updatedTasks);
+    setEditingIndex(null); //Pour revenir au stylo et poubelle quand on clique sur update
+    setEditedTask(""); //Pour que quand on va encore update, ça revient pas à la valeur d'avant
+  };
 
   return (
-    <>
+    <div className="all-todo-list">
       <h1>My To do List</h1>
-
+{/* Début map sur array stored dans task */}
       {clicked && tasks.map((element, index) =>
         <div className="my-task">
-          <span className="the-task">{element}</span>
+          {editingIndex == index ?
+            <input
+              value={editedTask}
+              onChange={(e) => setEditedTask(e.target.value)}
+              placeholder={element}
+            />
+            :
+            <span className="the-task">{element}</span>
+          }
           <div className="pen-trash">
-            <FaRegPenToSquare />
-            <FaRegTrashAlt onClick={() => eraseTask(index)}  />
-            {/* !!! index=index element dans map // Quand on ajoute un argument pour donner une valeur au parametre de eraseTask, on est obligé d'écrire la function comme ça, sinon elle serait appelé directement quand ça va render et non quand on va click */}
+            {editingIndex == index ?
+              <div>
+                <button onClick={() => handleUpdate(index)}>Update</button>
+                <button onClick={handleCancel}>Cancel</button>
+              </div>
+              :
+              <div>
+                <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
+                <FaRegTrashAlt onClick={() => eraseTask(index)} />
+              </div>
+            }
           </div>
         </div>
       )}
+      {/* Fin map dans array stored dans tasl */}
 
       <p>Tasks: </p>
       <input type="text" value={value} onChange={handleValue} />
       <button className="btn-task" onClick={handleClicked}>Save Task</button>
       {/* onClick={handleClicked} appelle la function quand on click, car on n'ajoute pas de paramètre */}
 
-    </>
+    </div>
   )
 }

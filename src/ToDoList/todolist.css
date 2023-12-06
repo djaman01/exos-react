@@ -1,11 +1,15 @@
-.my-task {
+.all-todo-list {
+  border: 2px solid grey;
+  width: 300px;
+  margin: 0 auto;
+  
+}
 
+.my-task {
   width: 200px;
   display: flex;
   justify-content: space-around;
   margin-bottom: 25px;
-
-  
 }
 
 .the-task {
