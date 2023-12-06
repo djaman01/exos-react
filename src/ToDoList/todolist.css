@@ -3,11 +3,19 @@
   width: 200px;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 25px;
+
   
 }
 
+.the-task {
+  width: 150px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .pen-trash {
-  width: 60px;
+  width: 50px;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
