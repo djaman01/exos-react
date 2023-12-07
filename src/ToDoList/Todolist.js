@@ -16,6 +16,8 @@ export default function Todolist() {
 
   const [checkedTasks, setcheckedTasks] = useState([]); //Array pour suivre le checkedTasks status for each task
 
+  const [status, setStatus] = useState("");
+
   const updatedTasks = [...tasks];
 
   //Pour déclencher le stockage de la value de l'input en onChange
@@ -40,12 +42,10 @@ export default function Todolist() {
     setcheckedTasks(deleteCheckedTasks);
   }
 
-
   //editingIndex state revient null et donc fait apparaitre le stylo, la poubelle et le task précédemment écrit
   const handleCancel = () => {
     setEditingIndex(null)
   }
-
 
   //Pour éditer les tasks
   const handleUpdate = (index) => {
@@ -72,6 +72,9 @@ export default function Todolist() {
     <div className="all-todo-list">
       <h1>My To do List</h1>
       {/* Début map sur array stored dans task */}
+      <button className="all-tasks" onClick={setStatus("all")}>All Tasks</button>
+      <button className="todo-tasks" onClick={setStatus("todo")}>To do </button>
+      <button className="done-tasks" onClick={setStatus("done")}> Done </button>
 
       <p>Tasks: </p>
       <input type="text" value={value} onChange={handleValue} />
@@ -79,34 +82,35 @@ export default function Todolist() {
 
 
       {clicked && tasks.map((element, index) =>
-        
-          <div key={index} className="my-task">
-            {editingIndex == index ?
-              <input
-                value={editedTask}
-                onChange={(e) => setEditedTask(e.target.value)}
-                placeholder={element}
-              />
-              :
-              <span className={`the-task ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >{element}</span>
-            }
 
-            <div className="pen-trash">
-              {editingIndex == index ?
-                <div>
-                  <button onClick={() => handleUpdate(index)}>Update</button>
-                  <button onClick={handleCancel}>Cancel</button>
-                </div>
-                :
-                <div>
-                  <input type="checkbox" onClick={()=>handlecheckedTasks(index)}></input>
-                  <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
-                  <FaRegTrashAlt onClick={() => eraseTask(index)} />
-                </div>
-              }
-            </div>
+        <div key={index} className="my-task">
+          {editingIndex == index ? //Si on clique sur le stylo ça montre ça:
+          
+            <input
+              value={editedTask}
+              onChange={(e) => setEditedTask(e.target.value)}
+              placeholder={element}
+            />
+            :
+            <span className={`the-task ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >{element}</span>
+          }
+
+          <div className="pen-trash">
+            {editingIndex == index ?
+              <div>
+                <button onClick={() => handleUpdate(index)}>Update</button>
+                <button onClick={handleCancel}>Cancel</button>
+              </div>
+              :
+              <div>
+                <input type="checkbox" onClick={() => handlecheckedTasks(index)}></input>
+                <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
+                <FaRegTrashAlt onClick={() => eraseTask(index)} />
+              </div>
+            }
           </div>
-        )}
+        </div>
+      )}
       {/* Fin map dans array stored dans task */}
 
 
