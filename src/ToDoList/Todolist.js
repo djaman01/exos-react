@@ -28,7 +28,7 @@ export default function Todolist() {
   const handleClicked = () => {
     setClicked(true); //quand c'est true le task apparait
     setTasks([...tasks, value]); //ajout de la task écrite dans l'input, à la fin de l'array qui contient toutes les tasks et sur laquelle on va mapper
-    setcheckedTasks([...checkedTasks, false]) //checkedTasks value will be false, for every new task
+    setcheckedTasks([...checkedTasks, false]) //ajoute false à la fin de l'array
     setValue(""); //value de l'input est vide pour ne pas affecter la tache ajoutée
 
   }

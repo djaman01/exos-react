@@ -32,4 +32,5 @@
 /* Pour barré le task quand on le check */
 .task-barré {
   text-decoration: line-through;
+  color: red;
 }
