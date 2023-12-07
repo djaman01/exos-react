@@ -2,7 +2,7 @@
   border: 2px solid grey;
   width: 300px;
   margin: 0 auto;
-  
+
 }
 
 .my-task {
@@ -19,7 +19,7 @@
 }
 
 .pen-trash {
-  width: 50px;
+  width: 100px;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -27,4 +27,9 @@
 
 .btn-task {
   cursor: pointer;
+}
+
+/* Pour barré le task quand on le check */
+.task-barré {
+  text-decoration: line-through;
 }
