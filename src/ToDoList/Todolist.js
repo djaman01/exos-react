@@ -75,16 +75,16 @@ export default function Todolist() {
   const getSortedTasks = () => {
     if (status === "done") {
       return tasks
-        .map((element, index) => ({ element, index }))//Chaque task de l'array devient un objet avec 2 properties: task:value de l'element et index: numéro index element
+        .map((element, index) => ({ element, index }))//Syntax de Notation qui donne un objet avec 2 properties et les valeus de l'array [{e: "task1", i:0}, {e:"task2", i:1}, ...etc]
         .filter(({ index }) => checkedTasks[index] === true)//Maintenant on ne garde dans cette array que les tasks qui ont été checked, grâce aux index
-        .sort((a, b) => a.element.localeCompare(b.element))//the tasks are sorted alphabetically in a locale-sensitive manner (ordre alphabétique) le task de la property a est comparé au task de la property b et sont mis dans un ordre alphabétique
+        // .sort((a, b) => a.element.localeCompare(b.element))//the tasks are sorted alphabetically in a locale-sensitive manner (ordre alphabétique) le task de la property a est comparé au task de la property b et sont mis dans un ordre alphabétique
         .map(({ element, index }) => ({ element, index }));//Puis on revient à la structure originiale
     }
     else if (status === "todo") {
       return tasks
         .map((element, index) => ({ element, index }))
         .filter((_, index) => !checkedTasks[index])
-        .sort((a, b) => a.element.localeCompare(b.element))
+        // .sort((a, b) => a.element.localeCompare(b.element))
         .map(({ element, index }) => ({ element, index }));
     }
     return tasks.map((element, index) => ({ element, index }));
@@ -97,50 +97,58 @@ export default function Todolist() {
 
   return (
     <div className="all-todo-list">
-      <h1>My To do List</h1>
-      {/* Début map sur array stored dans task */}
-      <button onClick={() => handleStatus('all')}>All Tasks</button>
-      <button onClick={() => handleStatus('todo')}> To do</button>
-      <button onClick={() => handleStatus('done')}> Done </button>
 
-      <p>Tasks: </p>
-      <input type="text" value={value} onChange={handleValue} />
-      <button className="btn-task" onClick={handleClicked}>Save Task</button> {/* onClick={handleClicked} appelle la function quand on click, car on n'ajoute pas de paramètre */}
+      <h1 className="new-task-title">Add a New Task</h1>
 
+      <div className="add-a-task">
+        <input className="input-add-task" type="text" placeholder="New task" value={value} onChange={handleValue} />
+        <button className="btn-task" onClick={handleClicked}>Add Task</button> {/* onClick={handleClicked} appelle la function quand on click, car on n'ajoute pas de paramètre */}
+      </div>
 
-      {clicked && getSortedTasks().map(({ element, index }) =>
+      <div className="the-task-list">
+        <h1>To do list</h1>
 
-        <div key={index} className="my-task">
-          {editingIndex == index ?
-            <input
-              value={editedTask}
-              onChange={(e) => setEditedTask(e.target.value)}
-              placeholder={element}
-            />
-            :
-            //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
-            <span className={`the-task ${status === 'done' && checkedTasks[index] == false ? 'hidden' : (status === 'todo' && checkedTasks[index] == true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
-              {element}
-            </span>
-          }
-
-          <div className="pen-trash">
-            {editingIndex == index ?
-              <div>
-                <button onClick={() => handleUpdate(index)}>Update</button>
-                <button onClick={handleCancel}>Cancel</button>
-              </div>
-              :
-              
-              <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : ''}`}>
-                <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]}/> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
-                <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
-                <FaRegTrashAlt onClick={() => eraseTask(index)} />
-              </div>
-            }
-          </div>
+        <div className="all-list-btn">
+        <button className="all-btn" onClick={() => handleStatus('all')}>All Tasks</button>
+        <button className="todo-btn" onClick={() => handleStatus('todo')}> To do</button>
+        <button className="done-btn" onClick={() => handleStatus('done')}> Done </button>
         </div>
-      )}
+
+{/* Début map sur array stored dans task */}
+        {clicked && getSortedTasks().map(({ element, index }) =>
+
+          <div key={index} className="my-task">
+            {editingIndex == index ?
+              <input
+                value={editedTask}
+                onChange={(e) => setEditedTask(e.target.value)}
+                placeholder={element}
+              />
+              :
+              //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
+              <span className={`the-task ${status === 'done' && checkedTasks[index] == false ? 'hidden' : (status === 'todo' && checkedTasks[index] == true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
+                {element}
+              </span>
+            }
+
+            <div className="pen-trash">
+              {editingIndex == index ?
+                <div>
+                  <button onClick={() => handleUpdate(index)}>Update</button>
+                  <button onClick={handleCancel}>Cancel</button>
+                </div>
+                :
+
+                <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : ''}`}>
+                  <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]} /> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
+                  <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
+                  <FaRegTrashAlt onClick={() => eraseTask(index)} />
+                </div>
+              }
+            </div>
+          </div>
+        )}
+      </div>
       {/* Fin map dans array stored dans task */}
 
 

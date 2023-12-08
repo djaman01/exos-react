@@ -1,9 +1,44 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 .all-todo-list {
-  border: 2px solid grey;
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
 
 }
+
+.add-a-task {
+  border: 2px solid grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 100px;
+
+}
+
+.new-task-title {
+  
+  text-align: center;
+}
+
+.input-add-task {
+  display: block;
+  width: 293px;
+  margin-bottom: 12px;
+}
+
+.btn-task {
+  cursor: pointer;
+  width: 300px;
+  height: 22px;
+  border-radius: 5px;
+  background-color: #4F84C4;
+  color: white;
+}
+
 
 .my-task {
   width: 200px;
@@ -11,6 +46,41 @@
   justify-content: space-around;
   margin-bottom: 25px;
 }
+
+.the-task-list {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.all-list-btn {
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+
+}
+
+.all-btn, .todo-btn, .done-btn {
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.done-btn {
+  background-color: #00A170;
+}
+
+.todo-btn {
+  background-color: #DD4124;
+}
+
+.all-btn {
+  background-color: #4F84C4;
+}
+
+
 
 .the-task {
   width: 150px;
@@ -22,10 +92,6 @@
   width: 100px;
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
-}
-
-.btn-task {
   cursor: pointer;
 }
 
