@@ -9,14 +9,14 @@ export default function Todolist() {
 
   const [clicked, setClicked] = useState(false); //Pour pouvoir créer une condition que si c'est true, la task apparait
 
-  const [tasks, setTasks] = useState([]); //Pour stock une array de toutes les tasks ajoutés et mapper sur elle grpace à JSX dans return
+  const [tasks, setTasks] = useState([]); //Pour stock une array de toutes les tasks ajoutés et mapper sur elle grace à JSX dans return
 
   const [editingIndex, setEditingIndex] = useState(null); //Pour suivre le task édité
   const [editedTask, setEditedTask] = useState(""); //Cible le task édité
 
   const [checkedTasks, setcheckedTasks] = useState([]); //Array pour suivre le checkedTasks status for each task
 
-  const [status, setStatus]= useState("")
+  const [status, setStatus] = useState("")
 
   const updatedTasks = [...tasks];
 
@@ -72,9 +72,9 @@ export default function Todolist() {
   }
 
   //Comme l'update methos est asynchronous, pour voir l'update du state, il faut faire le log dans useEffect
-  // useEffect(() => {
-  //   console.log(status);
-  // }, [status])
+  useEffect(() => {
+    console.log(checkedTasks);
+  }, [checkedTasks])
 
   return (
     <div className="all-todo-list">
@@ -99,7 +99,10 @@ export default function Todolist() {
               placeholder={element}
             />
             :
-            <span className={`the-task ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >{element}</span>
+            //ex: Si status==done(click sur bouton done) ET !checkedTasks[index] (=true = task is checked) alors fait disparaitre l'element normal
+            <span className={`the-task ${status === 'done' && !checkedTasks[index] ? 'hidden' : ''}  ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
+              {element}
+            </span>
           }
 
           <div className="pen-trash">
@@ -109,7 +112,7 @@ export default function Todolist() {
                 <button onClick={handleCancel}>Cancel</button>
               </div>
               :
-              <div>
+              <div className={`${status === 'done' && !checkedTasks[index] ? 'hidden' : ''}`}>
                 <input type="checkbox" onClick={() => handlecheckedTasks(index)}></input>
                 <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
                 <FaRegTrashAlt onClick={() => eraseTask(index)} />
