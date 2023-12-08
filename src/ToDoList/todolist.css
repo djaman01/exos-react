@@ -20,7 +20,7 @@
 }
 
 .new-task-title {
-  
+
   text-align: center;
 }
 
@@ -50,9 +50,9 @@
 }
 
 .the-task-list {
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .all-list-btn {
@@ -63,12 +63,16 @@ align-items: center;
 
 }
 
-.all-btn, .todo-btn, .done-btn {
+.all-btn,
+.todo-btn,
+.done-btn,
+.delete-btn {
   border-radius: 5px;
   color: white;
   width: 100px;
   border: 1px solid black;
   cursor: pointer;
+
 }
 
 .done-btn {
@@ -93,11 +97,11 @@ align-items: center;
 }
 
 .pen-trash {
-  
+
   display: flex;
   justify-content: space-between;
   cursor: pointer;
- 
+
 
 }
 
@@ -118,5 +122,16 @@ align-items: center;
   margin-left: 140px;
   margin-top: 3px;
   margin-bottom: 3px;
-  
+
+}
+
+.delete-btns-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete-btn {
+  background-color: #ed0000;
+  width: 150px;
+  height: 20px;
 }

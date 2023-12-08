@@ -36,10 +36,10 @@ export default function Todolist() {
   }
   //Pour delete un task
   const eraseTask = (index) => {
-    const deleteTask = tasks.filter((_, i) => i !== index)
+    const deleteTask = tasks.filter((_, i) => i !== index) //Array avec que les atsks différent de celui sélectionné
     const deleteCheckedTasks = checkedTasks.filter((_, i) => i !== index) //Pour updater l'array qui contient les checked task et que ça se supprime comme les tasks non barrés
-    setTasks(deleteTask);
-    setcheckedTasks(deleteCheckedTasks);
+    setTasks(deleteTask); //On met à jour la state sur laquelle on map pour qu'elle ne contienne plus le task sélectionn"
+    setcheckedTasks(deleteCheckedTasks); //Pareil pour les tasks barrés
   }
 
 
@@ -90,6 +90,22 @@ export default function Todolist() {
     return tasks.map((element, index) => ({ element, index }));
   };
 
+  //Pour delete toutes les dones tasks de l'array qui contient toutes les tasks et de l'array qui contient que les done tasks
+  const handleDeleteAllDone = () => {
+
+    const tasksNotChecked = tasks.filter((_,i)=> checkedTasks[i]==false) //On ne garde dans cette array que les tasks qui n'ont pas été checked
+    const updateCheckedTasks = checkedTasks.filter ((_,i)=> checkedTasks[i]==false)//On ne garde dans cette array que les checkedTasks qui sont false pour les retirer même de la catégorie "done"
+  
+    setTasks(tasksNotChecked);
+    setcheckedTasks(updateCheckedTasks)
+  }
+
+  //Pour Delete all tasks
+  const handleDeleteAll = () => {
+    setTasks([]); //Quand on appelle handleDeletAll; ca vide les state variable tasks et checkedTasks sur lesquelles on map et donc, ça supprime tout
+    setcheckedTasks([]);
+  }
+
   //Comme l'update methos est asynchronous, pour voir l'update du state, il faut faire le log dans useEffect
   // useEffect(() => {
   //   console.log(checkedTasks);
@@ -109,13 +125,13 @@ export default function Todolist() {
         <h1>To do list</h1>
 
         <div className="all-list-btn">
-        <button className="all-btn" onClick={() => handleStatus('all')}>All Tasks</button>
-        <button className="todo-btn" onClick={() => handleStatus('todo')}> To do</button>
-        <button className="done-btn" onClick={() => handleStatus('done')}> Done </button>
+          <button className="all-btn" onClick={() => handleStatus('all')}>All Tasks</button>
+          <button className="todo-btn" onClick={() => handleStatus('todo')}> To do</button>
+          <button className="done-btn" onClick={() => handleStatus('done')}> Done </button>
         </div>
 
-{/* Début map sur array stored dans task */}
-        {clicked && getSortedTasks().map(({ element, index }) =>
+        {/* Début map sur array stored dans task */}
+        { clicked && getSortedTasks().map(({ element, index }) =>
 
           <div key={index} className="my-task">
             {editingIndex == index ?
@@ -147,9 +163,15 @@ export default function Todolist() {
               }
             </div>
           </div>
+          
         )}
       </div>
       {/* Fin map dans array stored dans task */}
+
+      <div className="delete-btns-div">
+        <button className="delete-btn" onClick={handleDeleteAllDone}>Delete Done Tasks</button> {/* Je n'utilise pas le paramètre index car c'est hors de la .map et qu'en plus je cible toutes les tasks barrés, pas que 1*/}
+        <button className="delete-btn" onClick={handleDeleteAll}>Delete All Tasks</button>
+      </div>
 
 
     </div>
