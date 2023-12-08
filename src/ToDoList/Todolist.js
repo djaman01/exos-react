@@ -72,9 +72,9 @@ export default function Todolist() {
   }
 
   //Comme l'update methos est asynchronous, pour voir l'update du state, il faut faire le log dans useEffect
-  useEffect(() => {
-    console.log(checkedTasks);
-  }, [checkedTasks])
+  // useEffect(() => {
+  //   console.log(checkedTasks);
+  // }, [checkedTasks])
 
   return (
     <div className="all-todo-list">
@@ -99,8 +99,8 @@ export default function Todolist() {
               placeholder={element}
             />
             :
-            //ex: Si status==done(click sur bouton done) ET !checkedTasks[index] (=true = task is checked) alors fait disparaitre l'element normal
-            <span className={`the-task ${status === 'done' && !checkedTasks[index] ? 'hidden' : ''}  ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
+//Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
+            <span className={`the-task ${status === 'done' && checkedTasks[index]==false ? 'hidden' : (status === 'todo' && checkedTasks[index]==true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
               {element}
             </span>
           }
@@ -112,7 +112,8 @@ export default function Todolist() {
                 <button onClick={handleCancel}>Cancel</button>
               </div>
               :
-              <div className={`${status === 'done' && !checkedTasks[index] ? 'hidden' : ''}`}>
+
+              <div className={`${status === 'done' && checkedTasks[index]==false ? 'hidden' : status === 'todo' && checkedTasks[index]==true ? 'hidden' : ''}`}>
                 <input type="checkbox" onClick={() => handlecheckedTasks(index)}></input>
                 <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
                 <FaRegTrashAlt onClick={() => eraseTask(index)} />
