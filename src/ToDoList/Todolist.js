@@ -30,7 +30,7 @@ export default function Todolist() {
   const handleClicked = () => {
     setClicked(true); //quand c'est true le task apparait
     setTasks([...tasks, value]); //ajout de la task écrite dans l'input, à la fin de l'array qui contient toutes les tasks et sur laquelle on va mapper
-    setcheckedTasks([...checkedTasks, false]) //ajoute false à la fin de l'array
+    setcheckedTasks([...checkedTasks, false]) //ajoute false à la fin de l'array (si on met que false, ça ne va metter que 1 false dans l'array)
     setValue(""); //value de l'input est vide pour ne pas affecter la tache ajoutée
 
   }
@@ -131,9 +131,9 @@ export default function Todolist() {
                 <button onClick={handleCancel}>Cancel</button>
               </div>
               :
-
+              
               <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : ''}`}>
-                <input type="checkbox" onClick={() => handlecheckedTasks(index)}></input>
+                <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]}/> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
                 <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
                 <FaRegTrashAlt onClick={() => eraseTask(index)} />
               </div>
