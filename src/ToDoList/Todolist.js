@@ -139,7 +139,7 @@ export default function Todolist() {
                 </div>
                 :
 
-                <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : ''}`}>
+                <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : 'normal-display'}`}>
                   <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]} /> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
                   <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
                   <FaRegTrashAlt onClick={() => eraseTask(index)} />
