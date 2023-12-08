@@ -71,6 +71,25 @@ export default function Todolist() {
     setStatus(mode);
   }
 
+  //Pour sort les catégories dans l'ordre et l'une après l'autres au lieu de les laisser dans leur positions
+  const getSortedTasks = () => {
+    if (status === "done") {
+      return tasks
+        .map((element, index) => ({ element, index }))//Chaque task de l'array devient un objet avec 2 properties: task:value de l'element et index: numéro index element
+        .filter(({ index }) => checkedTasks[index] === true)//Maintenant on ne garde dans cette array que les tasks qui ont été checked, grâce aux index
+        .sort((a, b) => a.element.localeCompare(b.element))//the tasks are sorted alphabetically in a locale-sensitive manner (ordre alphabétique) le task de la property a est comparé au task de la property b et sont mis dans un ordre alphabétique
+        .map(({ element, index }) => ({ element, index }));//Puis on revient à la structure originiale
+    }
+    else if (status === "todo") {
+      return tasks
+        .map((element, index) => ({ element, index }))
+        .filter((_, index) => !checkedTasks[index])
+        .sort((a, b) => a.element.localeCompare(b.element))
+        .map(({ element, index }) => ({ element, index }));
+    }
+    return tasks.map((element, index) => ({ element, index }));
+  };
+
   //Comme l'update methos est asynchronous, pour voir l'update du state, il faut faire le log dans useEffect
   // useEffect(() => {
   //   console.log(checkedTasks);
@@ -89,7 +108,7 @@ export default function Todolist() {
       <button className="btn-task" onClick={handleClicked}>Save Task</button> {/* onClick={handleClicked} appelle la function quand on click, car on n'ajoute pas de paramètre */}
 
 
-      {clicked && tasks.map((element, index) =>
+      {clicked && getSortedTasks().map(({ element, index }) =>
 
         <div key={index} className="my-task">
           {editingIndex == index ?
@@ -99,8 +118,8 @@ export default function Todolist() {
               placeholder={element}
             />
             :
-//Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
-            <span className={`the-task ${status === 'done' && checkedTasks[index]==false ? 'hidden' : (status === 'todo' && checkedTasks[index]==true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
+            //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
+            <span className={`the-task ${status === 'done' && checkedTasks[index] == false ? 'hidden' : (status === 'todo' && checkedTasks[index] == true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
               {element}
             </span>
           }
@@ -113,7 +132,7 @@ export default function Todolist() {
               </div>
               :
 
-              <div className={`${status === 'done' && checkedTasks[index]==false ? 'hidden' : status === 'todo' && checkedTasks[index]==true ? 'hidden' : ''}`}>
+              <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : ''}`}>
                 <input type="checkbox" onClick={() => handlecheckedTasks(index)}></input>
                 <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
                 <FaRegTrashAlt onClick={() => eraseTask(index)} />
