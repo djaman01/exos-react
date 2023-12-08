@@ -16,7 +16,7 @@ export default function Todolist() {
 
   const [checkedTasks, setcheckedTasks] = useState([]); //Array pour suivre le checkedTasks status for each task
 
-  const [status, setStatus] = useState("");
+  const [status, setStatus]= useState("")
 
   const updatedTasks = [...tasks];
 
@@ -42,10 +42,12 @@ export default function Todolist() {
     setcheckedTasks(deleteCheckedTasks);
   }
 
+
   //editingIndex state revient null et donc fait apparaitre le stylo, la poubelle et le task précédemment écrit
   const handleCancel = () => {
     setEditingIndex(null)
   }
+
 
   //Pour éditer les tasks
   const handleUpdate = (index) => {
@@ -63,18 +65,24 @@ export default function Todolist() {
     setcheckedTasks(updatedCheckedTasks);
   }
 
-  //Comme setcheckedTasks est asynchronous, pour voir l'update du state, il faut faire le log dans useEffect
+  //Pour créer des catégories
+
+  const handleStatus = (mode) => {
+    setStatus(mode);
+  }
+
+  //Comme l'update methos est asynchronous, pour voir l'update du state, il faut faire le log dans useEffect
   // useEffect(() => {
-  //   console.log(checkedTasks);
-  // }, [checkedTasks])
+  //   console.log(status);
+  // }, [status])
 
   return (
     <div className="all-todo-list">
       <h1>My To do List</h1>
       {/* Début map sur array stored dans task */}
-      <button className="all-tasks" onClick={setStatus("all")}>All Tasks</button>
-      <button className="todo-tasks" onClick={setStatus("todo")}>To do </button>
-      <button className="done-tasks" onClick={setStatus("done")}> Done </button>
+      <button onClick={() => handleStatus('all')}>All Tasks</button>
+      <button onClick={() => handleStatus('todo')}> To do</button>
+      <button onClick={() => handleStatus('done')}> Done </button>
 
       <p>Tasks: </p>
       <input type="text" value={value} onChange={handleValue} />
@@ -84,8 +92,7 @@ export default function Todolist() {
       {clicked && tasks.map((element, index) =>
 
         <div key={index} className="my-task">
-          {editingIndex == index ? //Si on clique sur le stylo ça montre ça:
-          
+          {editingIndex == index ?
             <input
               value={editedTask}
               onChange={(e) => setEditedTask(e.target.value)}
