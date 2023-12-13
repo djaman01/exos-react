@@ -1,11 +1,20 @@
 import './App.css';
-import Todolist from './ToDoList/Todolist';
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import Main from './Main';
+import MartoCiso from './MartoCiso/MartoCiso';
+
+
+
+
 
 function App() {
   return (
-  <>
-  <Todolist />
-  </>
+      <BrowserRouter>
+        <Routes> 
+          <Route path='/' element={<Main />} />
+          <Route path='/marto' element={<MartoCiso />} />
+        </Routes>
+      </BrowserRouter>
   );
 
 }

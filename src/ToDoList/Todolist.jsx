@@ -2,6 +2,7 @@ import "./todolist.css"
 import { useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaRegPenToSquare } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Todolist() {
 
@@ -21,19 +22,19 @@ export default function Todolist() {
   const updatedTasks = [...tasks];
 
   //Pour déclencher le stockage de la value de l'input en onChange
+  //On n'utilise pas .innerText, car le text n'est pas statique, l'user peut écrire ce qu'il veut
   const handleValue = (e) => {
     setValue(e.target.value)
   }
 
-
-  //Quand on click qur le bouton save task
+  //Quand on click sur le bouton save task
   const handleClicked = () => {
     setClicked(true); //quand c'est true le task apparait
     setTasks([...tasks, value]); //ajout de la task écrite dans l'input, à la fin de l'array qui contient toutes les tasks et sur laquelle on va mapper
     setcheckedTasks([...checkedTasks, false]) //ajoute false à la fin de l'array (si on met que false, ça ne va metter que 1 false dans l'array)
-    setValue(""); //value de l'input est vide pour ne pas affecter la tache ajoutée
-
+    setValue(""); //value de l’input redevient vide, après ajout de la task
   }
+
   //Pour delete un task
   const eraseTask = (index) => {
     const deleteTask = tasks.filter((_, i) => i !== index) //Array avec que les atsks différent de celui sélectionné
@@ -42,12 +43,10 @@ export default function Todolist() {
     setcheckedTasks(deleteCheckedTasks); //Pareil pour les tasks barrés
   }
 
-
   //editingIndex state revient null et donc fait apparaitre le stylo, la poubelle et le task précédemment écrit
   const handleCancel = () => {
     setEditingIndex(null)
   }
-
 
   //Pour éditer les tasks
   const handleUpdate = (index) => {
@@ -93,9 +92,9 @@ export default function Todolist() {
   //Pour delete toutes les dones tasks de l'array qui contient toutes les tasks et de l'array qui contient que les done tasks
   const handleDeleteAllDone = () => {
 
-    const tasksNotChecked = tasks.filter((_,i)=> checkedTasks[i]==false) //On ne garde dans cette array que les tasks qui n'ont pas été checked
-    const updateCheckedTasks = checkedTasks.filter ((_,i)=> checkedTasks[i]==false)//On ne garde dans cette array que les checkedTasks qui sont false pour les retirer même de la catégorie "done"
-  
+    const tasksNotChecked = tasks.filter((_, i) => checkedTasks[i] === false) //On ne garde dans cette array que les tasks qui n'ont pas été checked
+    const updateCheckedTasks = checkedTasks.filter((_, i) => checkedTasks[i] === false)//On ne garde dans cette array que les checkedTasks qui sont false pour les retirer même de la catégorie "done"
+
     setTasks(tasksNotChecked);
     setcheckedTasks(updateCheckedTasks)
   }
@@ -131,10 +130,10 @@ export default function Todolist() {
         </div>
 
         {/* Début map sur array stored dans task */}
-        { clicked && getSortedTasks().map(({ element, index }) =>
+        {clicked && getSortedTasks().map(({ element, index }) =>
 
           <div key={index} className="my-task">
-            {editingIndex == index ?
+            {editingIndex === index ?
               <input
                 value={editedTask}
                 onChange={(e) => setEditedTask(e.target.value)}
@@ -142,20 +141,20 @@ export default function Todolist() {
               />
               :
               //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
-              <span className={`the-task ${status === 'done' && checkedTasks[index] == false ? 'hidden' : (status === 'todo' && checkedTasks[index] == true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
+              <span className={`the-task ${status === 'done' && checkedTasks[index] === false ? 'hidden' : (status === 'todo' && checkedTasks[index] === true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
                 {element}
               </span>
             }
 
             <div className="pen-trash">
-              {editingIndex == index ?
+              {editingIndex === index ?
                 <div>
                   <button onClick={() => handleUpdate(index)}>Update</button>
                   <button onClick={handleCancel}>Cancel</button>
                 </div>
                 :
 
-                <div className={`${status === 'done' && checkedTasks[index] == false ? 'hidden' : status === 'todo' && checkedTasks[index] == true ? 'hidden' : 'normal-display'}`}>
+                <div className={`${status === 'done' && checkedTasks[index] === false ? 'hidden' : status === 'todo' && checkedTasks[index] === true ? 'hidden' : 'normal-display'}`}>
                   <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]} /> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
                   <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
                   <FaRegTrashAlt onClick={() => eraseTask(index)} />
@@ -163,7 +162,7 @@ export default function Todolist() {
               }
             </div>
           </div>
-          
+
         )}
       </div>
       {/* Fin map dans array stored dans task */}
@@ -172,6 +171,10 @@ export default function Todolist() {
         <button className="delete-btn" onClick={handleDeleteAllDone}>Delete Done Tasks</button> {/* Je n'utilise pas le paramètre index car c'est hors de la .map et qu'en plus je cible toutes les tasks barrés, pas que 1*/}
         <button className="delete-btn" onClick={handleDeleteAll}>Delete All Tasks</button>
       </div>
+
+      <Link to='/marto'>
+        <button>Marteaux-ciseaux</button>
+      </Link>
 
 
     </div>
