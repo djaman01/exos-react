@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Main from './Main';
 import MartoCiso from "./MartoCiso/MartoCiso";
+import Templates from "./Templates/Templates";
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <Routes> 
           <Route path='/' element={<Main />} />
           <Route path='/marto' element={<MartoCiso/>} />
+          <Route path='/templates' element={<Templates/>}/>
         </Routes>
       </BrowserRouter>
   );

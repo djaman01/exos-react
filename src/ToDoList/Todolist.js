@@ -175,6 +175,9 @@ export default function Todolist() {
       <Link to='/marto'>
         <button>Marteaux-ciseaux</button>
       </Link>
+      <Link to='/templates'>
+        <button>See templates</button>
+      </Link>
 
 
     </div>

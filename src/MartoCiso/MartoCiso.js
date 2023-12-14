@@ -14,7 +14,7 @@ export default function MartoCiso() {
     setPlayerChoice(e.target.innerText)
     setComputerChoice(choices[Math.floor(Math.random() * choices.length)])
   }
-  
+
   //explication de getRandomChoice:
   //Math.random(): Generates a random floating-point number between 0 (inclusive) and 1 (exclusive) 
   // +
@@ -41,6 +41,7 @@ export default function MartoCiso() {
   return (
     <>
 
+    <h1 className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</h1>
 
       <h1> Computer Choice : {computerChoice} </h1>
 
@@ -53,9 +54,6 @@ export default function MartoCiso() {
       <h1> Player Choice : {playerChoice} </h1>
 
       <h1>Result: {getResult(playerChoice, computerChoice)}</h1>
-
-
-
 
     </>
   )
