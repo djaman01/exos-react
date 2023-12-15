@@ -2,14 +2,20 @@
   font-family: 'Roboto', sans-serif;
 }
 
-.all-todo-list {
-  width: 400px;
-  margin: 0 auto;
+body {
+  background-image: linear-gradient(56deg, rgba(254, 254, 254, 0.05) 0%, rgba(254, 254, 254, 0.05) 69%,rgba(160, 160, 160, 0.05) 69%, rgba(160, 160, 160, 0.05) 100%),linear-gradient(194deg, rgba(102, 102, 102, 0.02) 0%, rgba(102, 102, 102, 0.02) 60%,rgba(67, 67, 67, 0.02) 60%, rgba(67, 67, 67, 0.02) 100%),linear-gradient(76deg, rgba(169, 169, 169, 0.06) 0%, rgba(169, 169, 169, 0.06) 89%,rgba(189, 189, 189, 0.06) 89%, rgba(189, 189, 189, 0.06) 100%),linear-gradient(326deg, rgba(213, 213, 213, 0.04) 0%, rgba(213, 213, 213, 0.04) 45%,rgba(66, 66, 66, 0.04) 45%, rgba(66, 66, 66, 0.04) 100%),linear-gradient(183deg, rgba(223, 223, 223, 0.01) 0%, rgba(223, 223, 223, 0.01) 82%,rgba(28, 28, 28, 0.01) 82%, rgba(28, 28, 28, 0.01) 100%),linear-gradient(3deg, rgba(20, 20, 20, 0.06) 0%, rgba(20, 20, 20, 0.06) 62%,rgba(136, 136, 136, 0.06) 62%, rgba(136, 136, 136, 0.06) 100%),linear-gradient(200deg, rgba(206, 206, 206, 0.09) 0%, rgba(206, 206, 206, 0.09) 58%,rgba(6, 6, 6, 0.09) 58%, rgba(6, 6, 6, 0.09) 100%),linear-gradient(304deg, rgba(162, 162, 162, 0.07) 0%, rgba(162, 162, 162, 0.07) 27%,rgba(24, 24, 24, 0.07) 27%, rgba(24, 24, 24, 0.07) 100%),linear-gradient(186deg, rgba(166, 166, 166, 0.04) 0%, rgba(166, 166, 166, 0.04) 5%,rgba(210, 210, 210, 0.04) 5%, rgba(210, 210, 210, 0.04) 100%),linear-gradient(90deg, rgb(26, 118, 64),rgb(32, 207, 121),rgb(78, 196, 128));
+}
 
+.all-todo-list {
+  width: 450px;
+  margin: 0 auto;
+  height: auto;
+  border: 2px solid grey;
+  border-radius: 20px;
+  background-image: linear-gradient(56deg, rgba(43, 46, 224, 0.15) 0%,rgba(26, 218, 182, 0.15) 100%),linear-gradient(336deg, rgb(50, 52, 221),rgb(60, 239, 241));
 }
 
 .add-a-task {
-  border: 2px solid grey;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,10 +23,9 @@
   border-radius: 10px;
   height: 100px;
 
-}
+} 
 
 .new-task-title {
-
   text-align: center;
 }
 
@@ -42,10 +47,15 @@
 
 .my-task {
   width: 400px;
+  font-weight: bold;
+  letter-spacing: 1px;
   display: flex;
   justify-content: space-around;
   margin-bottom: 15px;
   border: 1px solid grey;
+  color: white;
+  background-image: repeating-linear-gradient(45deg, rgba(33,33,33,0.06) 0px, rgba(33,33,33,0.06) 2px,transparent 2px, transparent 4px),linear-gradient(45deg, rgb(33,33,33),transparent),linear-gradient(90deg, rgb(33,33,33),transparent),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+  border-radius: 4px;
 
 }
 
@@ -101,6 +111,7 @@
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  color: black;
 
 
 }

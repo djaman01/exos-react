@@ -111,65 +111,71 @@ export default function Todolist() {
   // }, [checkedTasks])
 
   return (
-    <div className="all-todo-list">
 
-      <h1 className="new-task-title">Add a New Task</h1>
+    <>
 
-      <div className="add-a-task">
-        <input className="input-add-task" type="text" placeholder="New task" value={value} onChange={handleValue} />
-        <button className="btn-task" onClick={handleClicked}>Add Task</button> {/* onClick={handleClicked} appelle la function quand on click, car on n'ajoute pas de paramètre */}
-      </div>
+      <div className="all-todo-list">
 
-      <div className="the-task-list">
-        <h1>To do list</h1>
+        <h1 className="new-task-title">Add a New Task</h1>
 
-        <div className="all-list-btn">
-          <button className="all-btn" onClick={() => handleStatus('all')}>All Tasks</button>
-          <button className="todo-btn" onClick={() => handleStatus('todo')}> To do</button>
-          <button className="done-btn" onClick={() => handleStatus('done')}> Done </button>
+        <div className="add-a-task">
+          <input className="input-add-task" type="text" placeholder="New task" value={value} onChange={handleValue} />
+          <button className="btn-task" onClick={handleClicked}>Add Task</button> {/* onClick={handleClicked} appelle la function quand on click, car on n'ajoute pas de paramètre */}
         </div>
 
-        {/* Début map sur array stored dans task */}
-        {clicked && getSortedTasks().map(({ element, index }) =>
+        <div className="the-task-list">
+          <h1>To do list</h1>
 
-          <div key={index} className="my-task">
-            {editingIndex === index ?
-              <input
-                value={editedTask}
-                onChange={(e) => setEditedTask(e.target.value)}
-                placeholder={element}
-              />
-              :
-              //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
-              <span className={`the-task ${status === 'done' && checkedTasks[index] === false ? 'hidden' : (status === 'todo' && checkedTasks[index] === true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
-                {element}
-              </span>
-            }
-
-            <div className="pen-trash">
-              {editingIndex === index ?
-                <div>
-                  <button onClick={() => handleUpdate(index)}>Update</button>
-                  <button onClick={handleCancel}>Cancel</button>
-                </div>
-                :
-
-                <div className={`${status === 'done' && checkedTasks[index] === false ? 'hidden' : status === 'todo' && checkedTasks[index] === true ? 'hidden' : 'normal-display'}`}>
-                  <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]} /> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
-                  <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
-                  <FaRegTrashAlt onClick={() => eraseTask(index)} />
-                </div>
-              }
-            </div>
+          <div className="all-list-btn">
+            <button className="all-btn" onClick={() => handleStatus('all')}>All Tasks</button>
+            <button className="todo-btn" onClick={() => handleStatus('todo')}> To do</button>
+            <button className="done-btn" onClick={() => handleStatus('done')}> Done </button>
           </div>
 
-        )}
-      </div>
-      {/* Fin map dans array stored dans task */}
+          {/* Début map sur array stored dans task */}
+          {clicked && getSortedTasks().map(({ element, index }) =>
 
-      <div className="delete-btns-div">
-        <button className="delete-btn" onClick={handleDeleteAllDone}>Delete Done Tasks</button> {/* Je n'utilise pas le paramètre index car c'est hors de la .map et qu'en plus je cible toutes les tasks barrés, pas que 1*/}
-        <button className="delete-btn" onClick={handleDeleteAll}>Delete All Tasks</button>
+            <div key={index} className="my-task">
+              {editingIndex === index ? //Si clique sur stylo pour modifier
+                <input
+                  value={editedTask}
+                  onChange={(e) => setEditedTask(e.target.value)}
+                  placeholder={element}
+                />
+                :
+                //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
+                <span className={`the-task ${status === 'done' && checkedTasks[index] === false ? 'hidden' : (status === 'todo' && checkedTasks[index] === true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
+                  {element}
+                </span>
+              }
+
+              <div className="pen-trash">
+                {editingIndex === index ?
+                  <div>
+                    <button onClick={() => handleUpdate(index)}>Update</button>
+                    <button onClick={handleCancel}>Cancel</button>
+                  </div>
+                  :
+
+                  <div className={`${status === 'done' && checkedTasks[index] === false ? 'hidden' : status === 'todo' && checkedTasks[index] === true ? 'hidden' : 'normal-display'}`}>
+                    <input type="checkbox" onClick={() => handlecheckedTasks(index)} checked={checkedTasks[index]} /> {/*si checkedTasks=true sera coché et restera coché même si o nchange de catégorie / Si false, ne sera plus coché*/}
+                    <FaRegPenToSquare onClick={() => setEditingIndex(index)} />
+                    <FaRegTrashAlt onClick={() => eraseTask(index)} />
+                  </div>
+                }
+              </div>
+            </div>
+
+          )}
+        </div>
+        {/* Fin map dans array stored dans task */}
+
+        <div className="delete-btns-div">
+          <button className="delete-btn" onClick={handleDeleteAllDone}>Delete Done Tasks</button> {/* Je n'utilise pas le paramètre index car c'est hors de la .map et qu'en plus je cible toutes les tasks barrés, pas que 1*/}
+          <button className="delete-btn" onClick={handleDeleteAll}>Delete All Tasks</button>
+        </div>
+
+
       </div>
 
       <Link to='/marto'>
@@ -179,7 +185,6 @@ export default function Todolist() {
         <button>See templates</button>
       </Link>
 
-
-    </div>
+    </>
   )
 }
