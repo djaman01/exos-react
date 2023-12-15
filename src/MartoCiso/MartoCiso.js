@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './martoCiso.css'
 
 export default function MartoCiso() {
 
@@ -6,9 +7,26 @@ export default function MartoCiso() {
 
   const [playerChoice, setPlayerChoice] = useState(null);
 
+  const [userName, setUserName] = useState('');
+
+  const [clicked, setClicked] = useState(false);
+
+  const [finalName, setFinalName] = useState(''); //Obligé pour que quand on reset la value à 0 après le save, le finalName restera rempli avec le userName entrée
+
+  const [score, setScore] = useState(0);
+
 
   const choices = ['Pierre', 'Feuille', 'Ciseaux']
 
+  const getUserName = (e) => {
+    setUserName(e.target.value);
+  }
+
+  const isClicked = () => {
+    setClicked(true);
+    setFinalName(userName);
+    setUserName('');
+  }
 
   const getPlayerChoice = (e) => {
     setPlayerChoice(e.target.innerText)
@@ -28,10 +46,16 @@ export default function MartoCiso() {
     return (
       (playerTurn === null && computerTurn === null) ? '' : //Pour que rien n'appraisse dans le résultat quand on load la page
         (playerTurn === computerTurn) ? 'Égalité' :
-          (playerTurn === "Pierre" && computerTurn === "Feuille") ? "You lose" :
-            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? "You lose" :
-              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? "You lose" :
-                "You win !"
+          (playerTurn === "Pierre" && computerTurn === "Feuille") ? `${finalName} loose...`:
+            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? `${finalName} loose...`:
+              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? `${finalName} loose...` :
+                `${finalName} Win !`
+    )
+  }
+
+  const getScore = (result, score) => {
+    return (
+      (result === `${finalName} Win !` ? setScore(score+=1) : null )
     )
   }
 
@@ -39,9 +63,18 @@ export default function MartoCiso() {
 
 
   return (
-    <>
+    <div className="marto-page">
 
-    <h1 className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</h1>
+      <h1 className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</h1>
+
+      <h2>Type your Username:</h2>
+      <input
+        value={userName}
+        onChange={getUserName}
+      />
+      <button onClick={isClicked}>Save</button>
+
+
 
       <h1> Computer Choice : {computerChoice} </h1>
 
@@ -51,10 +84,17 @@ export default function MartoCiso() {
       <button onClick={getPlayerChoice}>Feuille</button>
       <button onClick={getPlayerChoice}>Ciseaux</button>
 
-      <h1> Player Choice : {playerChoice} </h1>
+      {clicked &&
+      <h1> {finalName} Choice is : {playerChoice} </h1>
+      }
+
 
       <h1>Result: {getResult(playerChoice, computerChoice)}</h1>
 
-    </>
+      <div>
+
+
+      </div>
+    </div>
   )
 }

@@ -112,7 +112,7 @@ export default function Todolist() {
 
   return (
 
-    <>
+    <div className="todo-page">
 
       <div className="all-todo-list">
 
@@ -185,6 +185,6 @@ export default function Todolist() {
         <button>See templates</button>
       </Link>
 
-    </>
+    </div>
   )
 }
