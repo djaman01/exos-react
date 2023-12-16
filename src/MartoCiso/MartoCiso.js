@@ -88,12 +88,12 @@ export default function MartoCiso() {
       <button onClick={getPlayerChoice}>Ciseaux</button>
 
       {clicked &&
-      <h1> {finalName} Choice is : {playerChoice} </h1>
+      <h1> Your Choice is : {playerChoice} </h1>
       }
 
 
       <h1>Result: {result}</h1>
-      <h1>Player Score: {userScore} </h1>
+      <h1>{finalName} Score: {userScore} </h1>
       <h1>Computer Score: {ComputerScore} </h1>
 
 
