@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import './martoCiso.css'
 
 export default function MartoCiso() {
@@ -13,7 +13,8 @@ export default function MartoCiso() {
 
   const [finalName, setFinalName] = useState(''); //Obligé pour que quand on reset la value à 0 après le save, le finalName restera rempli avec le userName entrée
 
-  const [score, setScore] = useState(0);
+  const [userScore, setUserScore] = useState(0);
+  const [ComputerScore, setComputerScore] = useState(0);
 
 
   const choices = ['Pierre', 'Feuille', 'Ciseaux']
@@ -46,20 +47,22 @@ export default function MartoCiso() {
     return (
       (playerTurn === null && computerTurn === null) ? '' : //Pour que rien n'appraisse dans le résultat quand on load la page
         (playerTurn === computerTurn) ? 'Égalité' :
-          (playerTurn === "Pierre" && computerTurn === "Feuille") ? `${finalName} loose...`:
-            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? `${finalName} loose...`:
-              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? `${finalName} loose...` :
-                `${finalName} Win !`
+          (playerTurn === "Pierre" && computerTurn === "Feuille") ? `You loose...`:
+            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? `You loose...`:
+              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? `You loose...`:
+                `You Win !`
     )
   }
-
-  const getScore = (result, score) => {
-    return (
-      (result === `${finalName} Win !` ? setScore(score+=1) : null )
-    )
-  }
+  const result = getResult(playerChoice, computerChoice); //On stocke le résultat dans une variable pour pouvoir l'utiliser facilement
 
 
+  useEffect(() => {
+    result === 'You Win !' ? 
+    setUserScore(prevScore => prevScore + 1) : 
+    result === 'You loose...' && setComputerScore(prevScore => prevScore + 1); //Quand on veut arréter le elseIf sans mettre de contre partie, on écrit &&
+  }, [result, playerChoice, computerChoice]);
+  
+  
 
 
   return (
@@ -89,7 +92,10 @@ export default function MartoCiso() {
       }
 
 
-      <h1>Result: {getResult(playerChoice, computerChoice)}</h1>
+      <h1>Result: {result}</h1>
+      <h1>Player Score: {userScore} </h1>
+      <h1>Computer Score: {ComputerScore} </h1>
+
 
       <div>
 
