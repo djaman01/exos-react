@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
 import './martoCiso.css'
 
 export default function MartoCiso() {
@@ -60,17 +63,27 @@ export default function MartoCiso() {
   }
   const result = getResult(playerChoice, computerChoice); //On stocke le résultat dans une variable pour pouvoir l'utiliser facilement
 
-
+//Pour mettre à jour les states variables qui store les scores et augmenter si victoire
   useEffect(() => {
     result === 'You Win !' ?
       setUserScore(prevScore => prevScore + 1) :
       result === 'You loose...' && setComputerScore(prevScore => prevScore + 1); //Quand on veut arréter le elseIf sans mettre de contre partie, on écrit &&
   }, [result, playerChoice, computerChoice]);
 
+  //Pour mettre à jour les state variable qui store si vrai ou faux user ou computer a gagné
   useEffect(() => {
     (userScore === 3) ? setUserWin(true) :
       (ComputerScore === 3) && setComputerWin(true);
   }, [userScore, ComputerScore])
+
+  const resetScore = () => {
+    setUserScore(0);
+    setComputerScore(0);
+    //obligé de reset même les states userWin et ComputerWin pour que le popup réparaisse avec WIN si on atteint 3 points
+    setUserWin(false);
+    setComputerWin(false);
+
+  }
 
 
   return (
@@ -104,15 +117,23 @@ export default function MartoCiso() {
       <h1>{finalName} Score: {userScore} </h1>
       <h1>Computer Score: {ComputerScore} </h1>
 
-      {userWin === true ?
-        <div>
-          <h1>{finalName} Wins !</h1>
-        </div> :
-        computerWin === true &&
-        <div>
-        <h1>Computer Wins ...</h1>
-      </div>
-      }
+
+    
+
+      {userWin === true ? (
+        <Popup open className="popup-content" onClose={resetScore}>   {/* ClassName obligée, sinon ne reconnait pas le CSS (voir guide npm)*/}
+          <h1>{finalName} WINS !!</h1>
+        </Popup>
+      ) : 
+      computerWin === true && (
+        <Popup open className="popup-content" onClose={resetScore}>
+          <div>
+            <h1>Computer Wins ...</h1>
+          </div>
+        </Popup>
+      ) }
+
+
 
 
       <div>
