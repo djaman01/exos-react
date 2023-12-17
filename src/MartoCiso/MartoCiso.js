@@ -16,6 +16,11 @@ export default function MartoCiso() {
   const [userScore, setUserScore] = useState(0);
   const [ComputerScore, setComputerScore] = useState(0);
 
+  const [computerWin, setComputerWin] = useState(false);
+  const [userWin, setUserWin] = useState(false);
+
+
+
 
   const choices = ['Pierre', 'Feuille', 'Ciseaux']
 
@@ -47,9 +52,9 @@ export default function MartoCiso() {
     return (
       (playerTurn === null && computerTurn === null) ? '' : //Pour que rien n'appraisse dans le résultat quand on load la page
         (playerTurn === computerTurn) ? 'Égalité' :
-          (playerTurn === "Pierre" && computerTurn === "Feuille") ? `You loose...`:
-            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? `You loose...`:
-              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? `You loose...`:
+          (playerTurn === "Pierre" && computerTurn === "Feuille") ? `You loose...` :
+            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? `You loose...` :
+              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? `You loose...` :
                 `You Win !`
     )
   }
@@ -57,12 +62,15 @@ export default function MartoCiso() {
 
 
   useEffect(() => {
-    result === 'You Win !' ? 
-    setUserScore(prevScore => prevScore + 1) : 
-    result === 'You loose...' && setComputerScore(prevScore => prevScore + 1); //Quand on veut arréter le elseIf sans mettre de contre partie, on écrit &&
+    result === 'You Win !' ?
+      setUserScore(prevScore => prevScore + 1) :
+      result === 'You loose...' && setComputerScore(prevScore => prevScore + 1); //Quand on veut arréter le elseIf sans mettre de contre partie, on écrit &&
   }, [result, playerChoice, computerChoice]);
-  
-  
+
+  useEffect(() => {
+    (userScore === 3) ? setUserWin(true) :
+      (ComputerScore === 3) && setComputerWin(true);
+  }, [userScore, ComputerScore])
 
 
   return (
@@ -88,13 +96,23 @@ export default function MartoCiso() {
       <button onClick={getPlayerChoice}>Ciseaux</button>
 
       {clicked &&
-      <h1> Your Choice is : {playerChoice} </h1>
+        <h1> Your Choice is : {playerChoice} </h1>
       }
 
 
       <h1>Result: {result}</h1>
       <h1>{finalName} Score: {userScore} </h1>
       <h1>Computer Score: {ComputerScore} </h1>
+
+      {userWin === true ?
+        <div>
+          <h1>{finalName} Wins !</h1>
+        </div> :
+        computerWin === true &&
+        <div>
+        <h1>Computer Wins ...</h1>
+      </div>
+      }
 
 
       <div>
