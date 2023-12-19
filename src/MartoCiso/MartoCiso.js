@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+
 import './martoCiso.css'
 
 export default function MartoCiso() {
@@ -24,6 +25,8 @@ export default function MartoCiso() {
 
 
   const choices = ['Pierre', 'Feuille', 'Ciseaux']
+
+ 
 
   const getUserName = (e) => {
     setUserName(e.target.value);
