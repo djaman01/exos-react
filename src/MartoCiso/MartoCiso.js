@@ -58,7 +58,7 @@ export default function MartoCiso() {
 
   const getResult = (playerTurn, computerTurn) => { //Obligé" d'écrire return car + de 1 block code
     return (
-      (playerTurn === null && computerTurn === null) ? '' : //Pour que rien n'appraisse dans le résultat quand on load la page
+      (playerTurn.name === null && computerTurn.name === null) ? '' : //Pour que rien n'appraisse dans le résultat quand on load la page
         (playerTurn.name === computerTurn.name) ? 'Égalité' :
           (playerTurn.name === "Pierre" && computerTurn.name === "Feuille") ? `You loose...` :
             (playerTurn.name === "Feuille" && computerTurn.name === "Ciseaux") ? `You loose...` :
@@ -87,14 +87,14 @@ export default function MartoCiso() {
     //obligé de reset même les states userWin et ComputerWin pour que le popup réparaisse avec WIN si on atteint 3 points
     setUserWin(false);
     setComputerWin(false);
+    //Pour enlever les images une fois qu'on restart le jeu pour refaire une partie
+    setPlayerChoice({ name: null, image: null });
+    setComputerChoice({ name: null, image: null });
 
   }
 
   return (
     <div className="form-stars marto-page">
-
-
-     
 
       <section className="bg-stars">
         <span className="star"></span>
@@ -102,8 +102,6 @@ export default function MartoCiso() {
         <span className="star"></span>
         <span className="star"></span>
       </section>
-
-
 
       <p className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</p>
 
@@ -117,7 +115,7 @@ export default function MartoCiso() {
       <button className="marto-start" onClick={isClicked}>Start Game</button>
 
       <div className="marto-scores">
-        <h2 style={{ marginRight: "10px"}}> <span className="user-name">{finalName}</span> : <span className="styled-score">{userScore}</span> </h2>
+        <h2 style={{ marginRight: "10px" }}> <span className="user-name">{finalName}</span> : <span className="styled-score">{userScore}</span> </h2>
         <img className="foudre-score" src="/images/foudre-jeu.png" alt="foudre" />
         <h2> <span className="computer-name">Computer:</span>  <span className="styled-score">{ComputerScore} </span></h2>
       </div>
@@ -158,7 +156,7 @@ export default function MartoCiso() {
 
 
       <div>
-        
+
 
 
       </div>
