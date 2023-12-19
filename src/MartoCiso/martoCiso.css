@@ -25,3 +25,8 @@
 .styled-score {
   font-family: 'Bungee Spice', sans-serif;
 }
+
+.players-choices {
+  display: flex;
+  justify-content: space-around;
+}

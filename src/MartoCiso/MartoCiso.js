@@ -26,7 +26,12 @@ export default function MartoCiso() {
 
   const choices = ['Pierre', 'Feuille', 'Ciseaux']
 
- 
+  // const choices = [
+  //   {name: "Pierre", image:"/images/pierre-main.png"},
+  //   {name:"Feuille", image:"/images/feuille-main.png"},
+  //   {name:"Ciseaux", image:"images/ciseaux-main.png"}
+
+  // ]
 
   const getUserName = (e) => {
     setUserName(e.target.value);
@@ -100,13 +105,20 @@ export default function MartoCiso() {
       <button onClick={isClicked}>Save</button>
 
       <div className="marto-scores">
-        <h1 style={{marginRight: "10px"}}>{finalName}: <span className="styled-score">{userScore}</span> </h1>
+        <h1 style={{ marginRight: "10px" }}>{finalName}: <span className="styled-score">{userScore}</span> </h1>
         <img className="foudre-score" src="/images/foudre-jeu.png" alt="foudre" />
-        <h1>Computer: <span  className="styled-score">{ComputerScore} </span></h1>
+        <h1>Computer: <span className="styled-score">{ComputerScore} </span></h1>
       </div>
 
 
-      <h1> Computer Choice : {computerChoice} </h1>
+      <div className="players-choices">
+        {clicked &&
+          <h1> {playerChoice} </h1>
+        }
+
+        <h1> {computerChoice} </h1>
+      </div>
+
 
       <h1>Choose a sign</h1>
 
@@ -114,9 +126,6 @@ export default function MartoCiso() {
       <button onClick={getPlayerChoice}>Feuille</button>
       <button onClick={getPlayerChoice}>Ciseaux</button>
 
-      {clicked &&
-        <h1> Your Choice is : {playerChoice} </h1>
-      }
 
 
 
