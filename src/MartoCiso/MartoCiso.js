@@ -104,9 +104,9 @@ export default function MartoCiso() {
       <button className="marto-start" onClick={isClicked}>Start Game</button>
 
       <div className="marto-scores">
-        <h1 style={{ marginRight: "10px" }}>{finalName}: <span className="styled-score">{userScore}</span> </h1>
+        <h2 style={{ marginRight: "10px" }}>{finalName}: <span className="styled-score">{userScore}</span> </h2>
         <img className="foudre-score" src="/images/foudre-jeu.png" alt="foudre" />
-        <h1>Computer: <span className="styled-score">{ComputerScore} </span></h1>
+        <h2>Computer: <span className="styled-score">{ComputerScore} </span></h2>
       </div>
 
 

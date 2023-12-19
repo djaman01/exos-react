@@ -45,6 +45,26 @@ export default function Templates() {
    </form>
 
    </div>
+
+   {/* New form avec changement place placeholder */}
+
+   <div className="container-change-place">
+        <div className="card-change-place">
+            <a className="login-change-place">Log in</a>
+            <div className="inputBox-change-place">
+                <input type="text" required="required" />
+                <span className="user-change-place">Username</span>
+            </div>
+
+            <div className="inputBox-change-place">
+                <input type="password" required="required" />
+                <span>Password</span>
+            </div>
+
+            <button className="enter-change-place">Enter</button>
+
+        </div>
+    </div>
     </>
   )
 }
