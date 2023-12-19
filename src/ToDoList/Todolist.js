@@ -64,10 +64,9 @@ export default function Todolist() {
     setcheckedTasks(updatedCheckedTasks);
   }
 
-  //Pour créer des catégories
-
-  const handleStatus = (mode) => {
-    setStatus(mode);
+  //Pour créer des conditions au className des catégories
+  const handleStatus = (categorie) => {
+    setStatus(categorie);
   }
 
   //Pour sort les catégories dans l'ordre et l'une après l'autres au lieu de les laisser dans leur positions
@@ -143,7 +142,7 @@ export default function Todolist() {
                   placeholder={element}
                 />
                 :
-                //Is status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
+                //If status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
                 <span className={`the-task ${status === 'done' && checkedTasks[index] === false ? 'hidden' : (status === 'todo' && checkedTasks[index] === true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
                   {element}
                 </span>

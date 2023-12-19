@@ -23,8 +23,6 @@ export default function MartoCiso() {
   const [userWin, setUserWin] = useState(false);
 
 
-
-
   const choices = ['Pierre', 'Feuille', 'Ciseaux']
 
   const getUserName = (e) => {
@@ -63,7 +61,7 @@ export default function MartoCiso() {
   }
   const result = getResult(playerChoice, computerChoice); //On stocke le résultat dans une variable pour pouvoir l'utiliser facilement
 
-//Pour mettre à jour les states variables qui store les scores et augmenter si victoire
+  //Pour mettre à jour les states variables qui store les scores et augmenter si victoire
   useEffect(() => {
     result === 'You Win !' ?
       setUserScore(prevScore => prevScore + 1) :
@@ -98,6 +96,11 @@ export default function MartoCiso() {
       />
       <button onClick={isClicked}>Save</button>
 
+      <div className="marto-scores">
+        <h1 style={{marginRight: "10px"}}>{finalName}: <span className="styled-score">{userScore}</span> </h1>
+        <img className="foudre-score" src="/images/foudre-jeu.png" alt="foudre" />
+        <h1>Computer: <span  className="styled-score">{ComputerScore} </span></h1>
+      </div>
 
 
       <h1> Computer Choice : {computerChoice} </h1>
@@ -113,25 +116,20 @@ export default function MartoCiso() {
       }
 
 
-      <h1>Result: {result}</h1>
-      <h1>{finalName} Score: {userScore} </h1>
-      <h1>Computer Score: {ComputerScore} </h1>
 
-
-    
 
       {userWin === true ? (
         <Popup open className="popup-content" onClose={resetScore}>   {/* ClassName obligée, sinon ne reconnait pas le CSS (voir guide npm)*/}
           <h1>{finalName} WINS !!</h1>
         </Popup>
-      ) : 
-      computerWin === true && (
-        <Popup open className="popup-content" onClose={resetScore}>
-          <div>
-            <h1>Computer Wins ...</h1>
-          </div>
-        </Popup>
-      ) }
+      ) :
+        computerWin === true && (
+          <Popup open className="popup-content" onClose={resetScore}>
+            <div>
+              <h1>Computer Wins ...</h1>
+            </div>
+          </Popup>
+        )}
 
 
 
