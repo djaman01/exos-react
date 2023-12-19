@@ -97,10 +97,11 @@ export default function MartoCiso() {
 
       <h2>Type your Username:</h2>
       <input
+        className="input-user-marto"
         value={userName}
         onChange={getUserName}
       />
-      <button onClick={isClicked}>Start Game</button>
+      <button className="marto-start" onClick={isClicked}>Start Game</button>
 
       <div className="marto-scores">
         <h1 style={{ marginRight: "10px" }}>{finalName}: <span className="styled-score">{userScore}</span> </h1>
@@ -131,7 +132,7 @@ export default function MartoCiso() {
 
 
       {userWin === true ? (
-        <Popup open className="popup-content" onClose={resetScore}>   {/* ClassName obligée, sinon ne reconnait pas le CSS (voir guide npm)*/}
+        <Popup open className="popup-content" onClose={resetScore}>   {/* className obligée, sinon ne reconnait pas le CSS (voir guide npm)*/}
           <h1>{finalName} WINS !!</h1>
         </Popup>
       ) :
@@ -142,7 +143,6 @@ export default function MartoCiso() {
             </div>
           </Popup>
         )}
-
 
 
 

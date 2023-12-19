@@ -1,8 +1,15 @@
+
 .marto-page {
+  background: linear-gradient(14deg, rgba(2,0,36, 0.8) 0%, rgba(24, 24, 65, 0.7) 66%, 
+  rgb(20, 76, 99) 100%), radial-gradient(circle, rgba(2,0,36, 0.5) 0%, 
+  rgba(32, 15, 53, 0.2) 65%, rgba(14, 29, 28, 0.9) 100%);
+
+  border: 2px solid #fff;
+  
   font-family: 'Permanent Marker', cursive;
   border: 2px solid red;
   text-align: center;
-  width:100%;
+  width: 100%;
 }
 
 .title-shifumi {
@@ -136,3 +143,34 @@
 .btn-3 span:hover:after {
   width: 100%;
 }
+
+/* start button style */
+.marto-start {
+  font-size: 9pt;
+  font-family: 'Press Start 2p';
+  text-align: center;
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  padding: 10px 10px 10px 10px;
+  background-color: #0af30a;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: white;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 .2em green;
+  cursor: pointer;
+
+}
+
+.marto-start:active {
+  box-shadow: none;
+  position: relative;
+  top: .2em;
+}
+
+/* Style shooting stars */
+
+
