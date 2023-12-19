@@ -107,7 +107,7 @@ export default function MartoCiso() {
 
       <p className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</p>
 
-      <h2>Type your Username:</h2>
+      <h2 className="type-name">Type your Username:</h2>
 
       <input
         className="input-user-marto"
@@ -117,9 +117,9 @@ export default function MartoCiso() {
       <button className="marto-start" onClick={isClicked}>Start Game</button>
 
       <div className="marto-scores">
-        <h2 style={{ marginRight: "10px" }}>{finalName}: <span className="styled-score">{userScore}</span> </h2>
+        <h2 style={{ marginRight: "10px"}}> <span className="user-name">{finalName}</span> : <span className="styled-score">{userScore}</span> </h2>
         <img className="foudre-score" src="/images/foudre-jeu.png" alt="foudre" />
-        <h2>Computer: <span className="styled-score">{ComputerScore} </span></h2>
+        <h2> <span className="computer-name">Computer:</span>  <span className="styled-score">{ComputerScore} </span></h2>
       </div>
 
 
