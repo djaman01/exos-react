@@ -3,7 +3,9 @@
 .todo-page {
   font-family: 'Roboto', sans-serif;
   height: 100vh;
-  background-image: url('/public/fond-gris-peint.jpg');
+  background-image: url('/public/images/bureau-gris.avif');
+  background-size: cover;
+  
 }
 
 .all-todo-list {
