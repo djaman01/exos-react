@@ -244,14 +244,13 @@ border-radius: 7px;
 .star:nth-child(1) {
   top: 0;
   right: 0;
-  left: initial;
   animation-delay: 0s;
-  animation-duration: 1s;
+  animation-duration: 2s;
 }
 
 .star:nth-child(2) {
   top: 0;
-  right: 100px;
+  right: 20px;
   left: initial;
   animation-delay: 0.2s;
   animation-duration: 3s;
