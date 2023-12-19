@@ -16,6 +16,7 @@
 .marto-scores {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .foudre-score {
@@ -29,4 +30,9 @@
 .players-choices {
   display: flex;
   justify-content: space-around;
+  margin-top: 50px;
+}
+
+.versus-eclair {
+  width: 200px;
 }

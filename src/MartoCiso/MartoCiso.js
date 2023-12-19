@@ -116,6 +116,8 @@ export default function MartoCiso() {
           <h1> {playerChoice} </h1>
         }
 
+        <img className="versus-eclair" src="/images/vs-eclair.png" alt="versus" />
+
         <h1> {computerChoice} </h1>
       </div>
 
