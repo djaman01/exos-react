@@ -96,6 +96,7 @@ export default function MartoCiso() {
       <p className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</p>
 
       <h2>Type your Username:</h2>
+
       <input
         className="input-user-marto"
         value={userName}
