@@ -91,7 +91,19 @@ export default function MartoCiso() {
   }
 
   return (
-    <div className="marto-page">
+    <div className="form-stars marto-page">
+
+
+     
+
+      <section className="bg-stars">
+        <span className="star"></span>
+        <span className="star"></span>
+        <span className="star"></span>
+        <span className="star"></span>
+      </section>
+
+
 
       <p className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</p>
 
@@ -130,8 +142,6 @@ export default function MartoCiso() {
 
 
 
-
-
       {userWin === true ? (
         <Popup open className="popup-content" onClose={resetScore}>   {/* className obligée, sinon ne reconnait pas le CSS (voir guide npm)*/}
           <h1>{finalName} WINS !!</h1>
@@ -148,6 +158,7 @@ export default function MartoCiso() {
 
 
       <div>
+        
 
 
       </div>
