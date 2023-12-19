@@ -7,13 +7,13 @@ import './martoCiso.css'
 
 export default function MartoCiso() {
 
-  const [computerChoice, setComputerChoice] = useState(null);
+  const [computerChoice, setComputerChoice] = useState({ name: null, image: null });
+  const [playerChoice, setPlayerChoice] = useState({ name: null, image: null });
 
-  const [playerChoice, setPlayerChoice] = useState(null);
 
   const [userName, setUserName] = useState('');
 
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false); //Pour save le username
 
   const [finalName, setFinalName] = useState(''); //Obligé pour que quand on reset la value à 0 après le save, le finalName restera rempli avec le userName entrée
 
@@ -24,19 +24,17 @@ export default function MartoCiso() {
   const [userWin, setUserWin] = useState(false);
 
 
-  const choices = ['Pierre', 'Feuille', 'Ciseaux']
-
-  // const choices = [
-  //   {name: "Pierre", image:"/images/pierre-main.png"},
-  //   {name:"Feuille", image:"/images/feuille-main.png"},
-  //   {name:"Ciseaux", image:"images/ciseaux-main.png"}
-
-  // ]
+  const choices = [
+    { name: "Pierre", image: "/images/pierre-main.png" },
+    { name: "Feuille", image: "/images/feuille-main.png" },
+    { name: "Ciseaux", image: "images/ciseaux-main.png" }
+  ]
 
   const getUserName = (e) => {
     setUserName(e.target.value);
   }
 
+  //Pour afficher le userName:
   const isClicked = () => {
     setClicked(true);
     setFinalName(userName);
@@ -44,7 +42,8 @@ export default function MartoCiso() {
   }
 
   const getPlayerChoice = (e) => {
-    setPlayerChoice(e.target.innerText)
+    const selectedChoice = choices.find(choice => choice.name === e.target.innerText);
+    setPlayerChoice(selectedChoice); //on a selectionné l'objet qui correspond au choix de l'utilisateur (avec son name et son image)
     setComputerChoice(choices[Math.floor(Math.random() * choices.length)])
   }
 
@@ -60,14 +59,14 @@ export default function MartoCiso() {
   const getResult = (playerTurn, computerTurn) => { //Obligé" d'écrire return car + de 1 block code
     return (
       (playerTurn === null && computerTurn === null) ? '' : //Pour que rien n'appraisse dans le résultat quand on load la page
-        (playerTurn === computerTurn) ? 'Égalité' :
-          (playerTurn === "Pierre" && computerTurn === "Feuille") ? `You loose...` :
-            (playerTurn === "Feuille" && computerTurn === "Ciseaux") ? `You loose...` :
-              (playerTurn === "Ciseaux" && computerTurn === "Pierre") ? `You loose...` :
+        (playerTurn.name === computerTurn.name) ? 'Égalité' :
+          (playerTurn.name === "Pierre" && computerTurn.name === "Feuille") ? `You loose...` :
+            (playerTurn.name === "Feuille" && computerTurn.name === "Ciseaux") ? `You loose...` :
+              (playerTurn.name === "Ciseaux" && computerTurn.name === "Pierre") ? `You loose...` :
                 `You Win !`
     )
   }
-  const result = getResult(playerChoice, computerChoice); //On stocke le résultat dans une variable pour pouvoir l'utiliser facilement
+  const result = getResult(playerChoice, computerChoice); //On stocke le résultat dans une variable et on lui donne une valeur en argument
 
   //Pour mettre à jour les states variables qui store les scores et augmenter si victoire
   useEffect(() => {
@@ -91,18 +90,17 @@ export default function MartoCiso() {
 
   }
 
-
   return (
     <div className="marto-page">
 
-      <h1 className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</h1>
+      <p className="title-shifumi">Pierre- Feuille- Ciseaux: Le jeu !</p>
 
       <h2>Type your Username:</h2>
       <input
         value={userName}
         onChange={getUserName}
       />
-      <button onClick={isClicked}>Save</button>
+      <button onClick={isClicked}>Start Game</button>
 
       <div className="marto-scores">
         <h1 style={{ marginRight: "10px" }}>{finalName}: <span className="styled-score">{userScore}</span> </h1>
@@ -112,21 +110,21 @@ export default function MartoCiso() {
 
 
       <div className="players-choices">
-        {clicked &&
-          <h1> {playerChoice} </h1>
+        {
+          <img className="image-player" src={playerChoice.image} alt={playerChoice.name} />
         }
 
         <img className="versus-eclair" src="/images/vs-eclair.png" alt="versus" />
 
-        <h1> {computerChoice} </h1>
+        <img className="image-computer" src={computerChoice.image} alt={computerChoice.name} />
       </div>
 
 
       <h1>Choose a sign</h1>
 
-      <button onClick={getPlayerChoice}>Pierre</button>
-      <button onClick={getPlayerChoice}>Feuille</button>
-      <button onClick={getPlayerChoice}>Ciseaux</button>
+      <button className="custom-btn btn-3" onClick={getPlayerChoice}><span>Pierre</span></button>
+      <button className="custom-btn btn-3" onClick={getPlayerChoice}><span>Feuille</span></button>
+      <button className="custom-btn btn-3" onClick={getPlayerChoice}><span>Ciseaux</span></button>
 
 
 
