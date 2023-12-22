@@ -134,22 +134,23 @@ export default function Todolist() {
           {/* Début map sur array stored dans task */}
           {clicked && getSortedTasks().map(({ element, index }) =>
 
+//Si clique sur stylo pour modifier tache: ce qu'on voit à gauche
             <div key={index} className="my-task">
-              {editingIndex === index ? //Si clique sur stylo pour modifier
+              {editingIndex === index ? 
                 <input
                   value={editedTask}
                   onChange={(e) => setEditedTask(e.target.value)}
                   placeholder={element}
                 />
-                :
+                : //sinon on voit simplement la tâche
                 //If status = done + checked=false (cache l'element qui n'est pas coché) + Si status=todo et checked=true (cache l'element qui est coché)
                 <span className={`the-task ${status === 'done' && checkedTasks[index] === false ? 'hidden' : (status === 'todo' && checkedTasks[index] === true) ? 'hidden' : ''}   ${checkedTasks[index] ? 'task-barré' : 'the-task'}`} >
                   {element}
                 </span>
               }
-
-              <div className="pen-trash">
-                {editingIndex === index ?
+              {/* Si on clique sur le stylo pour modifier: ce qu'on voit à droite */}
+              <div className="pen-trash"> 
+                {editingIndex === index ? 
                   <div>
                     <button onClick={() => handleUpdate(index)}>Update</button>
                     <button onClick={handleCancel}>Cancel</button>
@@ -165,9 +166,11 @@ export default function Todolist() {
               </div>
             </div>
 
-          )}
+          )
+          }
+            {/* Fin map dans array stored dans task */}
         </div>
-        {/* Fin map dans array stored dans task */}
+      
 
         <div className="delete-btns-div">
           <button className="delete-btn" onClick={handleDeleteAllDone}>Delete Done Tasks</button> {/* Je n'utilise pas le paramètre index car c'est hors de la .map et qu'en plus je cible toutes les tasks barrés, pas que 1*/}
